@@ -6,6 +6,8 @@ import desmoj.core.simulator.Queue;
 import desmoj.core.simulator.TimeInstant;
 import desmoj.core.simulator.TimeSpan;
 
+
+
 public class Lavanderia extends Model{
 	
 	// Definição do tempo de simulação.
