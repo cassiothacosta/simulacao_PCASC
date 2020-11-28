@@ -13,9 +13,9 @@ public class EventoTerminoUsoDisco1 extends EventOf2Entities<Disco1, Cliente> {
 
 		MaquinaDeBusca maquinaDeBusca = (MaquinaDeBusca) getModel();
 		
-		maquinaDeBusca.sendTraceNote(disco1 + " terminou o uso do Disco1.");
+		maquinaDeBusca.sendTraceNote(cliente + " terminou o uso do Disco1.");
 
-		maquinaDeBusca.liberarDisco1(disco1);		
+		maquinaDeBusca.liberarDisco1();		
 		
 	}
 }

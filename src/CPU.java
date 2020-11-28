@@ -7,6 +7,9 @@ public class CPU extends Entity{
 	private boolean ocupada;
 
 	private Cliente cliente;
+    private int visitas;
+    private int totalRequisicoesSairam;
+    private float totalTempoOcupado;
     
    public CPU(Model owner, String name, boolean showInTrace) {
 	
@@ -23,17 +26,20 @@ public class CPU extends Entity{
 	   
 	   MaquinaDeBusca modeloMaquinaDeBusca;
 	   double tempoUtilizacao;
+	   double tempoProcessamento;
 	   EventoTerminoUsoCPU eventoTerminoUsoCPU;
 
 	   this.cliente = cliente;
 
 	   modeloMaquinaDeBusca = (MaquinaDeBusca) getModel();
-
-	   tempoUtilizacao = modeloMaquinaDeBusca.getTempoUtilizacao();
+	   tempoProcessamento = MaquinaDeBusca.distribuicaoTempoServicoCPU.sample();
+	   tempoUtilizacao = MaquinaDeBusca.getTempoUtilizacaoCPU();
+	   totalTempoOcupado += tempoProcessamento;
 	   modeloMaquinaDeBusca.sendTraceNote(this + " serve " + cliente + " por " + tempoUtilizacao + " minutos.");
 
-	   eventoTerminoUsoCPU = new EventoTerminoUsoCPU(modeloMaquinaDeBusca, "Evento relacionado ao término da lavagem das roupas do cliente", true);
+	   eventoTerminoUsoCPU = new EventoTerminoUsoCPU(modeloMaquinaDeBusca, "Evento relacionado ao termino do uso da CPU pelo cliente", true);
 	   eventoTerminoUsoCPU.schedule(this, cliente, new TimeSpan (tempoUtilizacao));
+	   setVisitas(getVisitas() + 1);
    }
 
    public boolean getOcupada() {
@@ -42,5 +48,26 @@ public class CPU extends Entity{
 
    public Cliente getCliente() {
 	   return (this.cliente);
+   }
+   
+   public int getVisitas() {
+       return visitas;
+   }
+
+   public void setVisitas(int visitas) {
+       this.visitas = visitas;
+   }
+
+
+   public int getTotalRequisicoesSairam() {
+       return totalRequisicoesSairam;
+   }
+
+   public void setTotalRequisicoesSairam(int totalRequisicoesSairam) {
+       this.totalRequisicoesSairam = totalRequisicoesSairam;
+   }
+   
+   public float getTotalTempoOcupado() {
+	   return totalTempoOcupado;
    }
 }

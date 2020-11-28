@@ -13,9 +13,9 @@ public class EventoTerminoUsoCPU extends EventOf2Entities<CPU, Cliente> {
 
 		MaquinaDeBusca maquinaDeBusca = (MaquinaDeBusca) getModel();
 		
-		maquinaDeBusca.sendTraceNote(cpu + " terminou o uso da CPU.");
+		maquinaDeBusca.sendTraceNote(cliente + " terminou o uso da CPU.");
 
-		maquinaDeBusca.liberarCPU(cpu);		
+		maquinaDeBusca.liberarCPU();		
 		
 	}
 }
